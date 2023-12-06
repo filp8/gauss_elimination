@@ -1,0 +1,54 @@
+
+# line1 = line1 + line2
+def sum_line(line1,line2) -> None:
+    for n,i in enumerate(line2):
+        line1[n] += i
+
+def dot_product(scalar, line) -> list[int]:
+    result = []
+    for i in range(len(line)):
+        result.append(line[i] * scalar)
+    return result
+
+def is_zero(start_point,col,matrix) -> bool:
+    for i in range(len(matrix[0]) - start_point):
+        yield matrix[start_point + i][col] == 0
+
+# line1,line2 = line2,line1
+def switch_line(matrix: list[list[int]], i_line1: int, i_line2: int):
+    matrix[i_line1],matrix[i_line2] = matrix[i_line2],matrix[i_line1]
+
+def calculate_scalar(pivot,a) -> int:
+    return (-1)*(a/pivot)
+
+def simplify(matrix,col,i_list1) -> None:
+    for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
+        if i + col > len(matrix):
+            return
+        if matrix[i_list1 + i][col] == 0:
+            continue
+        s = dot_product(calculate_scalar(matrix[i_list1][col],matrix[i_list1 + i][col]),matrix[i_list1])
+        sum_line(matrix[i_list1 + i],s)
+
+
+def gauss(matrix: list[list[int]]) -> list[list[int]]:
+    for i,line in enumerate(matrix):
+        pivot = line[i]
+        if pivot == 0:
+            if all(is_zero(i + 1,i,matrix)):
+                continue
+            else:
+                i_not_zero = 0
+                for n,line1 in enumerate(matrix[i:]):
+                    if line1[i] != 0:
+                        i_not_zero = n
+                switch_line(matrix,i,i_not_zero)
+        simplify(matrix,i,i)
+        
+
+
+m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+
+gauss(m)
+
+print(m)
