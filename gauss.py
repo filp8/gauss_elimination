@@ -45,10 +45,45 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
         
+def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
+    outList=[]
+    for i in range(len(A)):
+      newRow=list(A[i])
+      newRow.append(b[i][0])
+      outList.append(newRow)
+    return outList
+
+def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
+    Ab=cloneAndAppend(A, b)
+    gauss(Ab)
+    print("gauss(Ab) =", Ab)
+
+    outList=[]
+
+    colCount=len(A)
+    for j in reversed(range(colCount)):
+        i=j #diagonale principale
+        a_ij=Ab[i][j]
+        b_i=Ab[i][-1]
+        updKnown=b_i/a_ij
+        outList.append([updKnown])
+        for k in range(j):
+            coefToNull=A[k][j]
+            Ab[k][-1]-=updKnown*coefToNull
+
+    outList.reverse()
+    return  outList
 
 
-m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-gauss(m)
+#A = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+#b = [[5],[2],[0],[1]]
 
-print(m)
+A = [[2,0,1],[0,1,2],[4,2,1]]
+b = [[5],[3],[7]]
+
+print("A =", A)
+print("b =", b)
+
+x=resultColumn(A,b)
+print("x =", x)
