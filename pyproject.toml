@@ -2,7 +2,7 @@
 name = "gauss-elimination"
 version = "0.1.0"
 description = "Python Gauss Elimination Algorithm for matrices"
-authors = ["LucaSforza <lucasforza1234@icloud.com>"]
+authors = ["Luca Sforza <lucasforza1234@icloud.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "gauss_elimination"}]

@@ -10,7 +10,7 @@ def dot_product(scalar, line) -> list[int]:
         result.append(line[i] * scalar)
     return result
 
-def is_zero(start_point,col,matrix) -> bool:
+def is_zero(start_point,col,matrix):
     for i in range(len(matrix[0]) - start_point):
         yield matrix[start_point + i][col] == 0
 
@@ -44,11 +44,19 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                         i_not_zero = n
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
-        
+    return matrix
+
+def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
+    if not direct_calculation:
+        matrix = gauss(matrix)
+    for i,line in enumerate(matrix):
+        if line[i] == 0:
+            return False
+    return True
 
 
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-gauss(m)
-
+m = gauss(m)
 print(m)
+print(f"Invertible: {invertible(m,direct_calculation = True)}")
