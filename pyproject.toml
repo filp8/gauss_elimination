@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "gauss-elimination"
+version = "0.1.0"
+description = "Python Gauss Elimination Algorithm for matrices"
+authors = ["LucaSforza <lucasforza1234@icloud.com>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "gauss_elimination"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
