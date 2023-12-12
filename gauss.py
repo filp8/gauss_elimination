@@ -39,9 +39,10 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                 continue
             else:
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:]):
+                for n,line1 in enumerate(matrix[i:], start= i):
                     if line1[i] != 0:
                         i_not_zero = n
+                        break
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
     return matrix
@@ -59,4 +60,5 @@ m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 m = gauss(m)
 print(m)
+print(gauss(list(reversed(m))))
 print(f"Invertible: {invertible(m,direct_calculation = True)}")
