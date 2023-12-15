@@ -57,6 +57,13 @@ def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
             return False
     return True
 
+def trasportation(matrix: list[list[int]]) -> list[list[int]]:
+    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
+    for line in matrix:
+        for i,new_line in zip(line,new_matrix):
+            new_line.append(i)
+    return new_matrix
+
 def simplify_matrix(matrix: list[list[int]], direct_calculation = False) -> list[list[int]]:
     if not direct_calculation:
         matrix = gauss(matrix)
@@ -68,6 +75,8 @@ def simplify_matrix(matrix: list[list[int]], direct_calculation = False) -> list
 
 
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+
+print(trasportation(m))
 
 m = gauss(m)
 print(m)
