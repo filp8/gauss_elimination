@@ -64,16 +64,6 @@ def trasportation(matrix: list[list[int]]) -> list[list[int]]:
             new_line.append(i)
     return new_matrix
 
-def simplify_matrix(matrix: list[list[int]], direct_calculation = False) -> list[list[int]]:
-    if not direct_calculation:
-        matrix = gauss(matrix)
-    # posso suppore che è stata ridotta a scala la matrice
-    matrix = gauss(list(reversed(matrix)))
-    raise NotImplementedError("TODO: finish this function")
-    return matrix
-    
-
-
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 print(trasportation(m))
@@ -82,4 +72,3 @@ m = gauss(m)
 print(m)
 print(gauss(list(reversed(m))))
 print(f"Invertible: {invertible(m,direct_calculation = True)}")
-#print(f"More simplified: {simplify_matrix(m,direct_calculation = True)}")
