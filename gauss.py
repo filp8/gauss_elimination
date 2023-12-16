@@ -10,7 +10,7 @@ def dot_product(scalar, line) -> list[int]:
         result.append(line[i] * scalar)
     return result
 
-def is_zero(start_point,col,matrix):
+def is_zero(start_point,col,matrix) -> bool:
     for i in range(len(matrix[0]) - start_point):
         yield matrix[start_point + i][col] == 0
 
