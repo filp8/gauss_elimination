@@ -39,7 +39,7 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                 continue
             else:
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:]):
+                for n,line1 in enumerate(matrix[i:], start=i):
                     if line1[i] != 0:
                         i_not_zero = n
                 switch_line(matrix,i,i_not_zero)
