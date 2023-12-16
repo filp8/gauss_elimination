@@ -1,10 +1,10 @@
 
 # line1 = line1 + line2
-def sum_line(line1,line2) -> None:
+def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
         line1[n] += i
 
-def dot_product(scalar, line) -> list[int]:
+def dot_product(scalar: int, line: list[int]) -> list[int]:
     result = []
     for i in range(len(line)):
         result.append(line[i] * scalar)
@@ -32,6 +32,8 @@ def simplify(matrix,col,i_list1) -> None:
 
 
 def gauss(matrix: list[list[int]]) -> list[list[int]]:
+    if len(matrix[0]) != len(matrix):
+        raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     for i,line in enumerate(matrix):
         pivot = line[i]
         if pivot == 0:
@@ -39,7 +41,7 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                 continue
             else:
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:], start= i):
+                for n,line1 in enumerate(matrix[i:],start = i):
                     if line1[i] != 0:
                         i_not_zero = n
                         break
@@ -55,8 +57,16 @@ def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
             return False
     return True
 
+def trasportation(matrix: list[list[int]]) -> list[list[int]]:
+    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
+    for line in matrix:
+        for i,new_line in zip(line,new_matrix):
+            new_line.append(i)
+    return new_matrix
 
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+
+print(trasportation(m))
 
 m = gauss(m)
 print(m)
