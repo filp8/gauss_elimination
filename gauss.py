@@ -49,6 +49,21 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
         simplify(matrix,i,i)
     return matrix
         
+def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
+    if not direct_calculation:
+        matrix = gauss(matrix)
+    for i,line in enumerate(matrix):
+        if line[i] == 0:
+            return False
+    return True
+
+def trasportation(matrix: list[list[int]]) -> list[list[int]]:
+    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
+    for line in matrix:
+        for i,new_line in zip(line,new_matrix):
+            new_line.append(i)
+    return new_matrix
+
 def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
     outList=[]
     for i in range(len(A)):
@@ -79,35 +94,19 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     return  outList
 
 
-
 #A = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 #b = [[5],[2],[0],[1]]
 
-A = [[2,0,1],[0,1,2],[4,2,1]]
-b = [[5],[3],[7]]
+# A = [[2,0,1],[0,1,2],[4,2,1]]
+# b = [[5],[3],[7]]
 
-print("A =", A)
-print("b =", b)
+# print("A =", A)
+# print("b =", b)
 
-x=resultColumn(A,b)
-print("x =", x)
+# x=resultColumn(A,b)
+# print("x =", x)
 
 
-
-def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
-    if not direct_calculation:
-        matrix = gauss(matrix)
-    for i,line in enumerate(matrix):
-        if line[i] == 0:
-            return False
-    return True
-
-def trasportation(matrix: list[list[int]]) -> list[list[int]]:
-    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
-    for line in matrix:
-        for i,new_line in zip(line,new_matrix):
-            new_line.append(i)
-    return new_matrix
 
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
