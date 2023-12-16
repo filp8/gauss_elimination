@@ -41,13 +41,58 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                 continue
             else:
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:],start = i):
+                for n,line1 in enumerate(matrix[i:], start=i):
                     if line1[i] != 0:
                         i_not_zero = n
                         break
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
     return matrix
+        
+def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
+    outList=[]
+    for i in range(len(A)):
+      newRow=list(A[i])
+      newRow.append(b[i][0])
+      outList.append(newRow)
+    return outList
+
+def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
+    Ab=cloneAndAppend(A, b)
+    gauss(Ab)
+    print("gauss(Ab) =", Ab)
+
+    outList=[]
+
+    colCount=len(A)
+    for j in reversed(range(colCount)):
+        i=j #diagonale principale
+        a_ij=Ab[i][j]
+        b_i=Ab[i][-1]
+        updKnown=b_i/a_ij
+        outList.append([updKnown])
+        for k in range(j):
+            coefToNull=A[k][j]
+            Ab[k][-1]-=updKnown*coefToNull
+
+    outList.reverse()
+    return  outList
+
+
+
+#A = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+#b = [[5],[2],[0],[1]]
+
+A = [[2,0,1],[0,1,2],[4,2,1]]
+b = [[5],[3],[7]]
+
+print("A =", A)
+print("b =", b)
+
+x=resultColumn(A,b)
+print("x =", x)
+
+
 
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
