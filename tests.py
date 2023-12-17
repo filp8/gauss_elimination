@@ -3,21 +3,30 @@ from gauss import *
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-# matrice non quadrata TODO: crearla
-general_matrix = [[]]
+# matrice non quadrata
+general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
 def test_trasportation_for_square_matrix():
     expected = [[1,3,2,0],[3,9,1,1],[1,4,5,-1],[-1,1,2,-1]]
     assert expected == trasportation(square_matrix)
     
 def test_trasportation_for_non_square_matrix():
-    #TODO
-    pass
+    expected = [[2,-2,4],[-1,1,-2],[4,-7,5],[1,1,4],[-2,-1,-7]]
+    assert expected == trasportation(general_matrix)
 
 def test_gauss_test1():
-    #TODO: levare matrice che fa questo output di merda
-    expected = [[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, 1.3999999999999997]]
+    expected = [[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, 1.4]]
     assert expected == gauss(square_matrix)
+    
+def test_sum_line():
+    line1 = [1,2,3,4]
+    line2 = [-1,-2,-3,-4]
+    sum_line(line1,line2)
+    assert [0,0,0,0] == line1
+    line1 = [3,6,-1,6]
+    line2 = [0.5,-0.5,1,-3]
+    sum_line(line1,line2)
+    assert [3.5, 5.5, 0, 3] == line1
     
 def test_dot_product():
     vector1 = [1,7,3,2]
