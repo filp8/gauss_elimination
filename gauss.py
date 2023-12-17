@@ -32,6 +32,7 @@ def simplify(matrix,col,i_list1) -> None:
 
 
 def gauss(matrix: list[list[int]]) -> list[list[int]]:
+    #TODO: far funzionare l'algoritmo anche per matrici non quadrate
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     for i,line in enumerate(matrix):
