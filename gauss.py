@@ -94,10 +94,33 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     outList.reverse()
     return  outList
 
+def printMat(mat:list[list[int]]):
+    s = str()
+    le = 0
+    for line in mat:
+        for num in line:
+                l = len(str(num))
+                le = max(le,l)
 
-#A = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+    print(le)
+    for line in mat:
+        s+='\n'
+        for numero in line:
+            s+='  '
+            toadd = str(numero)
+            if len(toadd)<le:
+                spaz = le-len(toadd)
+                for i in range(spaz):
+                    toadd+=' '
+                
+            s+=toadd
+    print(s)
+    
+
+
+A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
 #b = [[5],[2],[0],[1]]
-
+printMat(A)
 # A = [[2,0,1],[0,1,2],[4,2,1]]
 # b = [[5],[3],[7]]
 
@@ -107,13 +130,11 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
 # x=resultColumn(A,b)
 # print("x =", x)
 
-
-
 m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-print(trasportation(m))
+# print(trasportation(m))
 
-m = gauss(m)
-print(m)
-print(gauss(list(reversed(m))))
-print(f"Invertible: {invertible(m,direct_calculation = True)}")
+# m = gauss(m)
+# print(m)
+# print(gauss(list(reversed(m))))
+# print(f"Invertible: {invertible(m,direct_calculation = True)}")
