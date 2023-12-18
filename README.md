@@ -19,7 +19,7 @@ Poi bisogna spostarsi con il terminale nella directory del progetto ed eseguire
 poetry install
 ```
 
-E come ultima cosa
+E come ultima cosa fare il comando nella directory del progetto
 
 ```bash
 poetry run pytest tests.py
