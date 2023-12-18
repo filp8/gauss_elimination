@@ -101,7 +101,6 @@ def printMat(mat:list[list[int]]):
                 l = len(str(num))
                 le = max(le,l)
 
-    print(le)
     for line in mat:
         s+='\n'
         for numero in line:
@@ -114,12 +113,24 @@ def printMat(mat:list[list[int]]):
                 
             s+=toadd
     print(s)
-    
 
+# def antidiagonalTrasportation(mat:list[list[float]])->list[list[float]]:
+#     traspMat = []
+#     for i in range(mat):
+#         for line2 in mat:
+#             traspMat.insert(0,line2[i])
+#     return traspMat
 
-A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
+def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
+    matRev=[]
+    for line in matrix:
+        li = list(reversed(line))
+        matRev.append(li)
+    matRevOut = list(reversed(matRev))
+    return matRevOut
+#A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
 #b = [[5],[2],[0],[1]]
-printMat(A)
+#printMat(A)
 # A = [[2,0,1],[0,1,2],[4,2,1]]
 # b = [[5],[3],[7]]
 
@@ -129,8 +140,29 @@ printMat(A)
 # x=resultColumn(A,b)
 # print("x =", x)
 
-m = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
+# m2 =list(reversed(m))
+# print(m)
+# print(m2)
+m1 = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+gauss(m1)
+#m2 = gauss(m1)
+# m3 = trasportation(m2)
+# m4 = antidiagonalTrasportation(m2)
+# m5 = gauss(m4)
+print("matrice partenza")
+printMat(m1)
+# print("matrice minimizzata")
+# printMat(m2)
+# print("matrice trasposta")
+# printMat(m3)
+# print("matrice trasposta antidiagonale")
+# printMat(m4)
+# print("matrice trasposta antidiagonale minimizzata")
+# printMat(m5)
+
+#printMat([[]])
+#printMat(antidiagonalTrasportation((gauss(m))))
 # print(trasportation(m))
 
 # m = gauss(m)
