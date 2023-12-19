@@ -1,3 +1,4 @@
+from copy import deepcopy
 from gauss import *
 
 # classica matrice quadrata
@@ -8,11 +9,11 @@ general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
 def test_trasportation_for_square_matrix():
     expected = [[1,3,2,0],[3,9,1,1],[1,4,5,-1],[-1,1,2,-1]]
-    assert expected == trasportation(square_matrix)
+    assert expected == trasportation(deepcopy(square_matrix))
     
 def test_trasportation_for_non_square_matrix():
     expected = [[2,-2,4],[-1,1,-2],[4,-7,5],[1,1,4],[-2,-1,-7]]
-    assert expected == trasportation(general_matrix)
+    assert expected == trasportation(deepcopy(general_matrix))
 
 def test_gauss_test1():
     expected = [[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, 1.4]]
