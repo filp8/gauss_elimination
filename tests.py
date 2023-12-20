@@ -17,7 +17,9 @@ def test_trasportation_for_non_square_matrix():
 
 def test_gauss_test1():
     expected = [[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, 1.4]]
-    assert expected == gauss(square_matrix)
+    switch,new_matrix = gauss(deepcopy(square_matrix))
+    assert pow(-1,switch) == -1 # controllo se switch è pari
+    assert expected == new_matrix
     
 def test_sum_line():
     line1 = [1,2,3,4]

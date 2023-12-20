@@ -1,3 +1,4 @@
+from typing import Tuple
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
@@ -21,26 +22,28 @@ def switch_line(matrix: list[list[int]], i_line1: int, i_line2: int):
 def calculate_scalar(pivot,a) -> int:
     return (-1)*(a/pivot)
 
-def simplify(matrix,col,i_list1) -> None:
+def simplify(matrix,col,index_pivot) -> None:
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
         if i + col > len(matrix):
             return
-        if matrix[i_list1 + i][col] == 0:
+        if matrix[index_pivot + i][col] == 0:
             continue
-        s = dot_product(calculate_scalar(matrix[i_list1][col],matrix[i_list1 + i][col]),matrix[i_list1])
-        sum_line(matrix[i_list1 + i],s)
+        s = dot_product(calculate_scalar(matrix[index_pivot][col],matrix[index_pivot + i][col]),matrix[index_pivot])
+        sum_line(matrix[index_pivot + i],s)
 
 
-def gauss(matrix: list[list[int]]) -> list[list[int]]:
+def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     #TODO: far funzionare l'algoritmo anche per matrici non quadrate
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+    switch_count = 0
     for i,line in enumerate(matrix):
         pivot = line[i]
         if pivot == 0:
             if all(is_zero(i + 1,i,matrix)):
                 continue
             else:
+                switch_count += 1
                 i_not_zero = 0
                 for n,line1 in enumerate(matrix[i:], start=i):
                     if line1[i] != 0:
@@ -48,7 +51,7 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                         break
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
-    return matrix
+    return switch_count,matrix
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
@@ -123,45 +126,16 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
-#A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
-#b = [[5],[2],[0],[1]]
-#printMat(A)
-# A = [[2,0,1],[0,1,2],[4,2,1]]
-# b = [[5],[3],[7]]
-
-# print("A =", A)
-# print("b =", b)
-
-# x=resultColumn(A,b)
-# print("x =", x)
+def det(matrix: list[list[int]]) -> int:
+    switch_count,matrix = gauss(matrix)
+    det = pow(-1,switch_count)
+    for i,line in enumerate(matrix):
+        det *= line[i]
+    return det
 
 
-# m2 =list(reversed(m))
-# print(m)
-# print(m2)
-m1 = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
-gauss(m1)
-#m2 = gauss(m1)
-# m3 = trasportation(m2)
-m4 = antidiagonalTrasportation(m1)
-# m5 = gauss(m4)
-print("matrice partenza")
-printMat(m1)
-printMat(m4)
-# print("matrice minimizzata")
-# printMat(m2)
-# print("matrice trasposta")
-# printMat(m3)
-# print("matrice trasposta antidiagonale")
-# printMat(m4)
-# print("matrice trasposta antidiagonale minimizzata")
-# printMat(m5)
+# classica matrice quadrata
+square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-#printMat([[]])
-#printMat(antidiagonalTrasportation((gauss(m))))
-# print(trasportation(m))
-
-# m = gauss(m)
-# print(m)
-# print(gauss(list(reversed(m))))
-# print(f"Invertible: {invertible(m,direct_calculation = True)}")
+# matrice non quadrata
+general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
