@@ -1,3 +1,4 @@
+from typing import Tuple
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
@@ -31,16 +32,18 @@ def simplify(matrix,col,index_pivot) -> None:
         sum_line(matrix[index_pivot + i],s)
 
 
-def gauss(matrix: list[list[int]]) -> list[list[int]]:
+def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     #TODO: far funzionare l'algoritmo anche per matrici non quadrate
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+    switch_count = 0
     for i,line in enumerate(matrix):
         pivot = line[i]
         if pivot == 0:
             if all(is_zero(i + 1,i,matrix)):
                 continue
             else:
+                switch_count += 1
                 i_not_zero = 0
                 for n,line1 in enumerate(matrix[i:], start=i):
                     if line1[i] != 0:
@@ -48,7 +51,7 @@ def gauss(matrix: list[list[int]]) -> list[list[int]]:
                         break
                 switch_line(matrix,i,i_not_zero)
         simplify(matrix,i,i)
-    return matrix
+    return switch_count,matrix
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
@@ -123,10 +126,9 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
-def det(matrix: list[list[int]], direct_calculation = False) -> int:
-    if not direct_calculation:
-        matrix = gauss(matrix)
-    det = 1
+def det(matrix: list[list[int]]) -> int:
+    switch_count,matrix = gauss(matrix)
+    det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
         det *= line[i]
     return det
