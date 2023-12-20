@@ -3,12 +3,12 @@ from typing import Tuple
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
-        line1[n] = round(i + line1[n],1)
+        line1[n] = round(i + line1[n],3)
 
 def dot_product(scalar: int, line: list[int]) -> list[int]:
     result = []
     for i in range(len(line)):
-        result.append(round(line[i] * scalar,1))
+        result.append(round(line[i] * scalar,3))
     return result
 
 def is_zero(start_point,col,matrix) -> bool:
