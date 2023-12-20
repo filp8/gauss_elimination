@@ -131,45 +131,9 @@ def det(matrix: list[list[int]], direct_calculation = False) -> int:
         det *= line[i]
     return det
 
-#A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
-#b = [[5],[2],[0],[1]]
-#printMat(A)
-# A = [[2,0,1],[0,1,2],[4,2,1]]
-# b = [[5],[3],[7]]
 
-# print("A =", A)
-# print("b =", b)
+# classica matrice quadrata
+square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
-# x=resultColumn(A,b)
-# print("x =", x)
-
-
-# m2 =list(reversed(m))
-# print(m)
-# print(m2)
-m1 = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
-gauss(m1)
-#m2 = gauss(m1)
-# m3 = trasportation(m2)
-m4 = antidiagonalTrasportation(m1)
-# m5 = gauss(m4)
-print("matrice partenza")
-printMat(m1)
-printMat(m4)
-# print("matrice minimizzata")
-# printMat(m2)
-# print("matrice trasposta")
-# printMat(m3)
-# print("matrice trasposta antidiagonale")
-# printMat(m4)
-# print("matrice trasposta antidiagonale minimizzata")
-# printMat(m5)
-
-#printMat([[]])
-#printMat(antidiagonalTrasportation((gauss(m))))
-# print(trasportation(m))
-
-# m = gauss(m)
-# print(m)
-# print(gauss(list(reversed(m))))
-# print(f"Invertible: {invertible(m,direct_calculation = True)}")
+# matrice non quadrata
+general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
