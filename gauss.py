@@ -123,6 +123,14 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
+def det(matrix: list[list[int]], direct_calculation = False) -> int:
+    if not direct_calculation:
+        matrix = gauss(matrix)
+    det = 1
+    for i,line in enumerate(matrix):
+        det *= line[i]
+    return det
+
 #A = [[1,3,1,-1],[3,9,4,1],[-2555555223,1,5,2],[0,1,-1,-1.3]]
 #b = [[5],[2],[0],[1]]
 #printMat(A)
