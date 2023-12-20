@@ -21,14 +21,14 @@ def switch_line(matrix: list[list[int]], i_line1: int, i_line2: int):
 def calculate_scalar(pivot,a) -> int:
     return (-1)*(a/pivot)
 
-def simplify(matrix,col,i_list1) -> None:
+def simplify(matrix,col,index_pivot) -> None:
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
         if i + col > len(matrix):
             return
-        if matrix[i_list1 + i][col] == 0:
+        if matrix[index_pivot + i][col] == 0:
             continue
-        s = dot_product(calculate_scalar(matrix[i_list1][col],matrix[i_list1 + i][col]),matrix[i_list1])
-        sum_line(matrix[i_list1 + i],s)
+        s = dot_product(calculate_scalar(matrix[index_pivot][col],matrix[index_pivot + i][col]),matrix[index_pivot])
+        sum_line(matrix[index_pivot + i],s)
 
 
 def gauss(matrix: list[list[int]]) -> list[list[int]]:
