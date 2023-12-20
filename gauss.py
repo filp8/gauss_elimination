@@ -1,4 +1,4 @@
-from typing import Tuple
+from typing import Tuple,Iterable
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
@@ -11,7 +11,7 @@ def dot_product(scalar: int, line: list[int]) -> list[int]:
         result.append(round(line[i] * scalar,3))
     return result
 
-def is_zero(start_point,col,matrix) -> bool:
+def is_zero(start_point,col,matrix) -> Iterable[bool]:
     for i in range(len(matrix[0]) - start_point):
         yield matrix[start_point + i][col] == 0
 
