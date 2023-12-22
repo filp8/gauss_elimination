@@ -34,7 +34,6 @@ def simplify(matrix,col,index_pivot) -> None:
 
 
 def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
-    #TODO: far funzionare l'algoritmo anche per matrici non quadrate
     switch_count = 0
     for i,line in enumerate(matrix):
         pivot = line[i]
@@ -142,7 +141,8 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
-    
+    matout = gauss(matout)
+
         
     return matout
 
@@ -151,6 +151,6 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
-nm = [[1,3,1,-1,2],[3,9,4,1,1],[2,1,5,2,4],[0,1,-1,-1,3]]
-det,mat= gauss(nm)
+
+det,mat =inversematrix(square_matrix)
 printMat(mat)
