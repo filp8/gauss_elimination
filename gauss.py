@@ -1,5 +1,7 @@
 from typing import Tuple,Iterable
 from copy import deepcopy
+
+
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
@@ -35,21 +37,21 @@ def simplify(matrix,col,index_pivot) -> None:
 
 def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     switch_count = 0
-    for i,line in enumerate(matrix):
+    for i,line in enumerate(matout):
         pivot = line[i]
         if pivot == 0:
-            if all(is_zero(i + 1,i,matrix)):
+            if all(is_zero(i + 1,i,matout)):
                 continue
             else:
                 switch_count += 1
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:], start=i):
+                for n,line1 in enumerate(matout[i:], start=i):
                     if line1[i] != 0:
                         i_not_zero = n
                         break
-                switch_line(matrix,i,i_not_zero)
-        simplify(matrix,i,i)
-    return switch_count,matrix
+                switch_line(matout,i,i_not_zero)
+        simplify(matout,i,i)
+    return switch_count,matout
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
