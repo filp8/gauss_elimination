@@ -56,7 +56,7 @@ def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
-        matrix = gauss(matrix)
+        det,matrix = gauss(matrix)
     for i,line in enumerate(matrix):
         if line[i] == 0:
             return False
@@ -137,6 +137,7 @@ def det(matrix: list[list[int]]) -> int:
 def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+    
     matout = deepcopy(matrix)
     nline = len(matrix)
     ncol = len(matrix[0])
@@ -184,3 +185,8 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+
+
+printMat(square_matrix)
+invertible(square_matrix)
+printMat(square_matrix)
