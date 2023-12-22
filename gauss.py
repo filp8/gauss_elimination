@@ -1,5 +1,5 @@
 from typing import Tuple,Iterable
-
+from copy import deepcopy
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
@@ -133,9 +133,22 @@ def det(matrix: list[list[int]]) -> int:
         det *= line[i]
     return det
 
+def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
+    matout = deepcopy(matrix)
+    nline = len(matrix)
+    ncol = len(matrix[0])
+    for i,line in enumerate(matout):
+        lcan = [0]*ncol
+        lcan[i] = 1
+        line+=lcan
+    
+        
+    return matout
 
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+
+print(inversematrix(square_matrix))
