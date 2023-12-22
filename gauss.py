@@ -142,7 +142,6 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     matout = deepcopy(matrix)
     nline = len(matrix)
     ncol = len(matrix[0])
-    print(ncol)
     for i,line in enumerate(matout):
         lcan = [0]*ncol
         lcan[i] = 1
@@ -166,9 +165,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
             for num in line:
                 nline.append(round(num/div))
             matouttraspg[i]=nline
-    printMat(matouttraspg)
     finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
-    print(finalmat)
     return finalmat
 
 def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
@@ -180,6 +177,18 @@ def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
         matout.append(colonna)
     return matout
 
+def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[int]]:
+    matB = matRigToCol(matB)
+    matout = []
+    for line in matA:
+        lout = []
+        for col in matB:
+            nout = 0
+            for i,numa in enumerate(line):
+                nout += numa * col[i]
+            lout.append(nout)
+        matout.append(lout)
+    return matout
 
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
@@ -190,5 +199,6 @@ general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 # matrice invertibile 2x2
 
 invmatrix1 = [[1,2],[2,3]]
-invmatrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
-printMat(inversematrix(invmatrix2))
+matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
+invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
+printMat(matrixmoltiplication(matrix2,invmatrix2))
