@@ -7,6 +7,13 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
+# matrice invertibile
+invertible_matrix = [[1,2,-1],[-2,0,1],[1,-1,0]]
+
+def test_inversematrix():
+    expected = [[1,1,2],[1,1,1],[2,3,4]]
+    assert expected == inversematrix(invertible_matrix)
+
 def test_trasportation_for_square_matrix():
     expected = [[1,3,2,0],[3,9,1,1],[1,4,5,-1],[-1,1,2,-1]]
     assert expected == trasportation(square_matrix)

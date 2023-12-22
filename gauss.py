@@ -137,10 +137,12 @@ def det(matrix: list[list[int]]) -> int:
 def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
-    
+    if not(invertible(matrix)):
+        raise IndexError(f"The matrix is not invertible.")
     matout = deepcopy(matrix)
     nline = len(matrix)
     ncol = len(matrix[0])
+    print(ncol)
     for i,line in enumerate(matout):
         lcan = [0]*ncol
         lcan[i] = 1
@@ -156,19 +158,18 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     matouttrasp = []
     for i,linesx in enumerate(matsx):
             matouttrasp.append(linesx+matdx[i])
-    printMat(matouttrasp)
     det,matouttraspg=gauss(matouttrasp)
-    printMat(matouttraspg)
     for i,line in enumerate(matouttraspg):
         if line[i]!=1 and line[i]!=0:
             div = line[i]
             nline = []
             for num in line:
                 nline.append(round(num/div))
-            matouttrasp[i]=nline
+            matouttraspg[i]=nline
     printMat(matouttraspg)
-
-    return matout
+    finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
+    print(finalmat)
+    return finalmat
 
 def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
     matout = []
@@ -186,7 +187,8 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
+# matrice invertibile 2x2
 
-printMat(square_matrix)
-invertible(square_matrix)
-printMat(square_matrix)
+invmatrix1 = [[1,2],[2,3]]
+invmatrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
+printMat(inversematrix(invmatrix2))
