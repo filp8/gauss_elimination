@@ -1,4 +1,6 @@
 from typing import Tuple,Iterable
+from copy import deepcopy
+
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
@@ -36,22 +38,23 @@ def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     #TODO: far funzionare l'algoritmo anche per matrici non quadrate
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+    matout = deepcopy(matrix)
     switch_count = 0
-    for i,line in enumerate(matrix):
+    for i,line in enumerate(matout):
         pivot = line[i]
         if pivot == 0:
-            if all(is_zero(i + 1,i,matrix)):
+            if all(is_zero(i + 1,i,matout)):
                 continue
             else:
                 switch_count += 1
                 i_not_zero = 0
-                for n,line1 in enumerate(matrix[i:], start=i):
+                for n,line1 in enumerate(matout[i:], start=i):
                     if line1[i] != 0:
                         i_not_zero = n
                         break
-                switch_line(matrix,i,i_not_zero)
-        simplify(matrix,i,i)
-    return switch_count,matrix
+                switch_line(matout,i,i_not_zero)
+        simplify(matout,i,i)
+    return switch_count,matout
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
@@ -139,3 +142,8 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+
+print(square_matrix)
+s,mat=gauss(square_matrix)
+print(mat)
+print(square_matrix)
