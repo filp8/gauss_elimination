@@ -142,15 +142,22 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan[i] = 1
         line+=lcan
     matout = gauss(matout)
-
-        
     return matout
 
+def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
+    matout = []
+    for i,col in enumerate(matrix[0]):
+        colonna = []
+        for rig in matrix:
+            colonna.append(rig[i])
+        matout.append(colonna)
+    return matout
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
-det,mat =inversematrix(square_matrix)
-printMat(mat)
+
+printMat(square_matrix)
+printMat(matRigToCol(square_matrix))
