@@ -37,6 +37,7 @@ def simplify(matrix,col,index_pivot) -> None:
 
 def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     switch_count = 0
+    matout = deepcopy(matrix)
     for i,line in enumerate(matout):
         pivot = line[i]
         if pivot == 0:
@@ -183,8 +184,3 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
-
-
-#printMat(square_matrix)
-inversematrix(square_matrix)
-print(-5/-5)
