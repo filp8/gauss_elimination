@@ -1,5 +1,5 @@
 from typing import Tuple,Iterable
-
+from copy import deepcopy
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
@@ -12,7 +12,8 @@ def dot_product(scalar: int, line: list[int]) -> list[int]:
     return result
 
 def is_zero(start_point,col,matrix) -> Iterable[bool]:
-    for i in range(len(matrix[0]) - start_point):
+    numline = len(matrix)
+    for i in range(numline - start_point):
         yield matrix[start_point + i][col] == 0
 
 # line1,line2 = line2,line1
@@ -33,9 +34,6 @@ def simplify(matrix,col,index_pivot) -> None:
 
 
 def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
-    #TODO: far funzionare l'algoritmo anche per matrici non quadrate
-    if len(matrix[0]) != len(matrix):
-        raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     switch_count = 0
     for i,line in enumerate(matrix):
         pivot = line[i]
@@ -133,9 +131,58 @@ def det(matrix: list[list[int]]) -> int:
         det *= line[i]
     return det
 
+def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
+    if len(matrix[0]) != len(matrix):
+        raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+    matout = deepcopy(matrix)
+    nline = len(matrix)
+    ncol = len(matrix[0])
+    for i,line in enumerate(matout):
+        lcan = [0]*ncol
+        lcan[i] = 1
+        line+=lcan
+    det,matout = gauss(matout)
+    matoutcol = matRigToCol(matout) 
+    matsx = matoutcol[0:ncol]
+    matdx = matoutcol[ncol:]
+    matsx = matRigToCol(matsx)
+    matdx = matRigToCol(matdx)
+    matsx = antidiagonalTrasportation(matsx)
+    matdx = antidiagonalTrasportation(matdx)
+    matouttrasp = []
+    for i,linesx in enumerate(matsx):
+            matouttrasp.append(linesx+matdx[i])
+    printMat(matouttrasp)
+    det,matouttraspg=gauss(matouttrasp)
+    printMat(matouttraspg)
+    for i,line in enumerate(matouttraspg):
+        if line[i]!=1 and line[i]!=0:
+            div = line[i]
+            nline = []
+            for num in line:
+                nline.append(round(num/div))
+            matouttrasp[i]=nline
+    printMat(matouttraspg)
+
+    return matout
+
+def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
+    matout = []
+    for i,col in enumerate(matrix[0]):
+        colonna = []
+        for rig in matrix:
+            colonna.append(rig[i])
+        matout.append(colonna)
+    return matout
+
 
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+
+
+#printMat(square_matrix)
+inversematrix(square_matrix)
+print(-5/-5)
