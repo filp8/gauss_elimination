@@ -141,7 +141,29 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
-    matout = gauss(matout)
+    det,matout = gauss(matout)
+    matoutcol = matRigToCol(matout) 
+    matsx = matoutcol[0:ncol]
+    matdx = matoutcol[ncol:]
+    matsx = matRigToCol(matsx)
+    matdx = matRigToCol(matdx)
+    matsx = antidiagonalTrasportation(matsx)
+    matdx = antidiagonalTrasportation(matdx)
+    matouttrasp = []
+    for i,linesx in enumerate(matsx):
+            matouttrasp.append(linesx+matdx[i])
+    printMat(matouttrasp)
+    det,matouttraspg=gauss(matouttrasp)
+    printMat(matouttraspg)
+    for i,line in enumerate(matouttraspg):
+        if line[i]!=1 and line[i]!=0:
+            div = line[i]
+            nline = []
+            for num in line:
+                nline.append(round(num/div))
+            matouttrasp[i]=nline
+    printMat(matouttraspg)
+
     return matout
 
 def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
@@ -152,6 +174,8 @@ def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
             colonna.append(rig[i])
         matout.append(colonna)
     return matout
+
+
 # classica matrice quadrata
 square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
@@ -159,5 +183,6 @@ square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 
 
-printMat(square_matrix)
-printMat(matRigToCol(square_matrix))
+#printMat(square_matrix)
+inversematrix(square_matrix)
+print(-5/-5)
