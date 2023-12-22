@@ -201,4 +201,6 @@ general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
 invmatrix1 = [[1,2],[2,3]]
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
+printMat(invmatrix2)
 printMat(matrixmoltiplication(matrix2,invmatrix2))
+printMat(invmatrix2)
