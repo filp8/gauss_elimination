@@ -141,6 +141,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
+    det,matout=gauss(matout)
     
         
     return matout
