@@ -146,6 +146,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
+<<<<<<< HEAD
     det,matout = gauss(matout)
     matoutcol = matRigToCol(matout) 
     matsx = matoutcol[0:ncol]
@@ -188,6 +189,11 @@ def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[i
                 nout += numa * col[i]
             lout.append(nout)
         matout.append(lout)
+=======
+    det,matout=gauss(matout)
+    
+        
+>>>>>>> inversematrix
     return matout
 
 # classica matrice quadrata
