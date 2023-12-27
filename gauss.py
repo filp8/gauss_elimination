@@ -35,7 +35,9 @@ def simplify(matrix,col,index_pivot) -> None:
         sum_line(matrix[index_pivot + i],s)
 
 
-def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
+def square_gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
+    #questa funzione è ottimizzata per le matrici quadrate
+    #TODO: aggiungere errore per le matrici non quadrate
     switch_count = 0
     matout = deepcopy(matrix)
     for i,line in enumerate(matout):
@@ -56,7 +58,7 @@ def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
-        det,matrix = gauss(matrix)
+        det,matrix = square_gauss(matrix)
     for i,line in enumerate(matrix):
         if line[i] == 0:
             return False
@@ -79,7 +81,7 @@ def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float
 
 def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     Ab=cloneAndAppend(A, b)
-    gauss(Ab)
+    square_gauss(Ab)
     print("gauss(Ab) =", Ab)
 
     outList=[]
@@ -128,7 +130,7 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     return matRevOut
 
 def det(matrix: list[list[int]]) -> int:
-    switch_count,matrix = gauss(matrix)
+    switch_count,matrix = square_gauss(matrix)
     det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
         det *= line[i]
@@ -146,7 +148,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
-    det,matout = gauss(matout)
+    det,matout = square_gauss(matout)
     matoutcol = matRigToCol(matout) 
     matsx = matoutcol[0:ncol]
     matdx = matoutcol[ncol:]
@@ -157,7 +159,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     matouttrasp = []
     for i,linesx in enumerate(matsx):
             matouttrasp.append(linesx+matdx[i])
-    det,matouttraspg=gauss(matouttrasp)
+    det,matouttraspg=square_gauss(matouttrasp)
     for i,line in enumerate(matouttraspg):
         if line[i]!=1 and line[i]!=0:
             div = line[i]
