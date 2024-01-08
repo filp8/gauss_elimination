@@ -1,5 +1,6 @@
 from typing import Tuple,Iterable
 from copy import deepcopy
+from fractions import *
 
 
 # line1 = line1 + line2
