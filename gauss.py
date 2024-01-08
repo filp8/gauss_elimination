@@ -1,6 +1,7 @@
 from typing import Tuple,Iterable
 from copy import deepcopy
 from fractions import *
+from tui import *
 
 # for debug
 def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
@@ -9,31 +10,47 @@ def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
         new_matrix.append([Fraction(x,1) for x in line])
     return new_matrix
 
+def to_fractions2(matrix) -> list[list[Fraction]]:
+    new_matrix: list[list[Fraction]] = []
+    for line in matrix:
+        nline = []
+        for num in line:
+            if type(num)==int:
+                nline.append(Fraction(num))
+            elif type(num)==str:
+                nline.append(Fraction(num))
+            elif type(num)==float:
+                nline.append(Fraction.from_float(num))
+            else:
+                raise  ValueError(f"input type not implemented.")
+        new_matrix.append(nline)
+
+    return new_matrix
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
         line1[n] = round(i + line1[n],3)
 
-def dot_product(scalar: int, line: list[int]) -> list[int]:
+def dot_product(scalar: Fraction, line: list[Fraction]) -> list[Fraction]:
     result = []
     for i in range(len(line)):
         result.append(round(line[i] * scalar,3))
     return result
 
-def is_zero(start_point,col,matrix) -> Iterable[bool]:
+def is_zero(start_point,col,matrix) -> Iterable[Fraction]:
     numline = len(matrix)
     for i in range(numline - start_point):
         yield matrix[start_point + i][col] == 0
 
 # line1,line2 = line2,line1
-def switch_line(matrix: list[list[int]], i_line1: int, i_line2: int):
+def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
     matrix[i_line1],matrix[i_line2] = matrix[i_line2],matrix[i_line1]
 
-def calculate_scalar(pivot,a) -> int:
+def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
     return (-1)*(a/pivot)
 
-def simplify(matrix,col,index_pivot) -> None:
+def simplify(matrix,col,index_pivot):
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
         if i + col > len(matrix):
             return
@@ -43,7 +60,7 @@ def simplify(matrix,col,index_pivot) -> None:
         sum_line(matrix[index_pivot + i],s)
 
 
-def gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
+def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
     switch_count = 0
     matout = deepcopy(matrix)
     for i,line in enumerate(matout):
@@ -178,7 +195,7 @@ def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[i
     return matout
 
 # classica matrice quadrata
-square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
@@ -189,3 +206,5 @@ invmatrix1 = [[1,2],[2,3]]
 # matrice invertibile e la sua inversa
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
+
+printMat(gauss(to_fractions2(square_matrix))[1])
