@@ -98,27 +98,6 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     outList.reverse()
     return  outList
 
-def printMat(mat:list[list[int]]):
-    s = str()
-    le = 0
-    for line in mat:
-        for num in line:
-                l = len(str(num))
-                le = max(le,l)
-
-    for line in mat:
-        s+='\n'
-        for numero in line:
-            s+='  '
-            toadd = str(numero)
-            if len(toadd)<le:
-                spaz = le-len(toadd)
-                for i in range(spaz):
-                    toadd+=' '
-                
-            s+=toadd
-    print(s)
-
 def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRev=[]
     for line in matrix:
