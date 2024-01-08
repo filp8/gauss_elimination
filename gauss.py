@@ -206,5 +206,3 @@ invmatrix1 = [[1,2],[2,3]]
 # matrice invertibile e la sua inversa
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
-
-printMat(gauss(to_fractions2(square_matrix))[1])
