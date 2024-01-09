@@ -13,9 +13,12 @@ def multiplyTable(insieme:list[int])->list[int]:
 def multiplyTableCongruence(insieme:list[int],mod:int)->list[int]:
     table: list[list[int]] = [[] for _ in range(len(insieme))]
     for x in range(len(insieme)):
+        table[x].append(insieme[x])
         for y in range(len(insieme)):
             table[x].append(getCongruenge(insieme[x]*insieme[y],mod))
-    return table
+    formatline = ['*']+insieme
+    tableout = [formatline]+table
+    return tableout
 
 
 ins1 = [0,1,2,3,4,5,6]
