@@ -56,7 +56,10 @@ def simplify(matrix,col,index_pivot):
             return
         if matrix[index_pivot + i][col] == 0:
             continue
-        s = dot_product(calculate_scalar(matrix[index_pivot][col],matrix[index_pivot + i][col]),matrix[index_pivot])
+        s = dot_product(calculate_scalar(
+            matrix[index_pivot][col],matrix[index_pivot + i][col]
+            ),matrix[index_pivot]
+        )
         sum_line(matrix[index_pivot + i],s)
 
 def square_gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
@@ -79,7 +82,7 @@ def square_gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
                 switch_line(matout,i,i_not_zero)
         simplify(matout,i,i)
     return switch_count,matout
-        
+
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
         det,matrix = square_gauss(matrix)
@@ -98,9 +101,9 @@ def trasportation(matrix: list[list[int]]) -> list[list[int]]:
 def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
     outList=[]
     for i in range(len(A)):
-      newRow=list(A[i])
-      newRow.append(b[i][0])
-      outList.append(newRow)
+        newRow=list(A[i])
+        newRow.append(b[i][0])
+        outList.append(newRow)
     return outList
 
 def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
@@ -141,7 +144,10 @@ def det(matrix: list[list[int]]) -> int:
 
 def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     if len(matrix[0]) != len(matrix):
-        raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+        raise IndexError(
+            f"""The matrix must be a square.
+            Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}"""
+        )
     if not(invertible(matrix)):
         raise IndexError(f"The matrix is not invertible.")
     matout = deepcopy(matrix)
