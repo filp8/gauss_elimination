@@ -1,7 +1,7 @@
 
 # Gauss Elimination Algorithm
 
-Semplice algoritmo in python per l'eliminazione di Gauss
+Semplice algoritmo in python per l'eliminazione di Gauss ed altri algoritmi Algebrici
 
 
 
