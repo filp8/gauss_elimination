@@ -29,21 +29,5 @@ def multiplyTableCongruence(insieme:list[int],mod:int,operazione)->list[int]:
 
 def generatore(unita:int,limit:int,insPartenza:list[int]=[],partenza=0,operazione=somma,)->list[list[int]]:
     for i in range(limit):
-        insPartenza.append(partenza+i)
+        insPartenza.append(unita*i)
     return insPartenza
-
-
-
-print(generatore(1,100))
-
-
-u8 = [1,3,5,7]
-z4 = [0,1,2,3]
-ins1 = [0,1,2,3,4,5,6]
-
-
-printMat(multiplyTable(ins1))
-printMat(multiplyTableCongruence(ins1,7,moltiplicazione))
-
-printMat(multiplyTableCongruence(u8,8,somma))
-printMat(multiplyTableCongruence(z4,4,moltiplicazione))
