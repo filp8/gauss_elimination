@@ -1,5 +1,13 @@
 from typing import Tuple,Iterable
 from copy import deepcopy
+from fractions import *
+
+# for debug
+def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
+    new_matrix: list[list[Fraction]] = []
+    for line in matrix:
+        new_matrix.append([Fraction(x,1) for x in line])
+    return new_matrix
 
 
 # line1 = line1 + line2
