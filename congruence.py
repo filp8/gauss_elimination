@@ -27,7 +27,20 @@ def multiplyTableCongruence(insieme:list[int],mod:int,operazione)->list[int]:
     tableout = [formatline]+table
     return tableout
 
-def generatore(unita:int,limit:int,insPartenza:list[int]=[],partenza=0,operazione=somma,)->list[list[int]]:
+def generatore(unita:int,limit:int,insPartenza:list[int]=[],partenza=0,operazione=somma)->list[list[int]]:
     for i in range(limit):
         insPartenza.append(unita*i)
     return insPartenza
+
+def generatoreR(unita:int,limit:int,insPartenza:list[int]=[],partenza=0,operazione=somma)->list[list[int]]:
+    if partenza == 0 and limit>0:
+        insPartenza.append(0)
+        last,segno = operazione(partenza,unita)
+        insPartenza.append(last)
+        generatoreR(unita,limit-2,insPartenza,last,operazione)
+    elif limit>0:
+        last,segno = operazione(partenza,unita)
+        insPartenza.append(last)
+        generatoreR(unita,limit-1,insPartenza,last,operazione)
+    return insPartenza
+
