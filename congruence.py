@@ -1,6 +1,6 @@
 from tui import *
 
-def getCongruenge(numero:int,modulo:int)->int:
+def getCongruence(numero:int,modulo:int)->int:
     return numero%modulo
 
 def multiplyTable(insieme:list[int])->list[int]:
@@ -18,11 +18,8 @@ def multiplyTableCongruence(insieme:list[int],mod:int,operazione)->list[int]:
     for x in range(len(insieme)):
         table[x].append(insieme[x])
         for y in range(len(insieme)):
-            #print(type(insieme[x]))
-            #print(type(operazione))
             risultato,segnop = operazione(insieme[x],insieme[y])
-            #print(risultato)
-            table[x].append(getCongruenge(risultato,mod))
+            table[x].append(getCongruence(risultato,mod))
     formatline = [segnop]+insieme
     tableout = [formatline]+table
     return tableout
@@ -44,3 +41,4 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int]=[],partenza=0,operazio
         generatoreR(unita,limit-1,insPartenza,last,operazione)
     return insPartenza
 
+printMat(multiplyTableCongruence(generatoreR(1,9),9,moltiplicazione))
