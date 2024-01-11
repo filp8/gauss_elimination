@@ -1,24 +1,19 @@
-from typing import Tuple,Iterable
+from typing import Tuple,Iterable,Any
 from copy import deepcopy
 from fractions import *
 from tui import *
 
-def to_fractions(matrix) -> list[list[Fraction]]:
-    new_matrix: list[list[Fraction]] = []
-    for line in matrix:
-        nline = []
-        for num in line:
-            if (type(num)==int) | (type(num)==str):
-                nline.append(Fraction(num))
-            elif type(num)== Fraction:
-                nline.append(num)
-            elif type(num)==float:
-                nline.append(Fraction.from_float(num))
-            else:
-                raise  ValueError(f"input type not implemented.")
-        new_matrix.append(nline)
+def line_to_fractions(line: list[Any]) -> list[Fraction]:
+    nline = []
+    for num in line:
+        if type(num) != float:
+            nline.append(Fraction(num))
+        else:
+            raise ValueError(f"Float type can create problems")
+    return nline
 
-    return new_matrix
+def to_fractions(matrix: list[list[Any]]) -> list[list[Fraction]]:
+    return [line_to_fractions(line) for line in matrix]
 
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
