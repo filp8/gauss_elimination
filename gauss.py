@@ -64,7 +64,10 @@ def simplify(matrix,col,index_pivot):
 
 def square_gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
     #questa funzione è ottimizzata per le matrici quadrate
-    #TODO: aggiungere errore per le matrici non quadrate
+    if len(matrix[0]) != len(matrix):
+        raise ValueError(f"""The matrix must be a square.
+            Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}"""
+        )
     switch_count = 0
     matout = deepcopy(matrix)
     for i,line in enumerate(matout):
