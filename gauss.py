@@ -3,22 +3,15 @@ from copy import deepcopy
 from fractions import *
 from tui import *
 
-# for debug
-def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
-    new_matrix: list[list[Fraction]] = []
-    for line in matrix:
-        new_matrix.append([Fraction(x,1) for x in line])
-    return new_matrix
-
-def to_fractions2(matrix) -> list[list[Fraction]]:
+def to_fractions(matrix) -> list[list[Fraction]]:
     new_matrix: list[list[Fraction]] = []
     for line in matrix:
         nline = []
         for num in line:
-            if type(num)==int:
+            if (type(num)==int) | (type(num)==str):
                 nline.append(Fraction(num))
-            elif type(num)==str:
-                nline.append(Fraction(num))
+            elif type(num)== Fraction:
+                nline.append(num)
             elif type(num)==float:
                 nline.append(Fraction.from_float(num))
             else:
