@@ -2,28 +2,28 @@ from copy import deepcopy
 from gauss import *
 
 # classica matrice quadrata
-square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+square_matrix = to_fractions([[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]])
 
 # matrice non quadrata
-general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+general_matrix = to_fractions([[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]])
 
 # matrice invertibile
-invertible_matrix = [[1,2,-1],[-2,0,1],[1,-1,0]]
+invertible_matrix = to_fractions([[1,2,-1],[-2,0,1],[1,-1,0]])
 
 def test_inversematrix():
-    expected = [[1,1,2],[1,1,1],[2,3,4]]
+    expected = to_fractions([[1,1,2],[1,1,1],[2,3,4]])
     assert expected == inversematrix(invertible_matrix)
 
 def test_trasportation_for_square_matrix():
-    expected = [[1,3,2,0],[3,9,1,1],[1,4,5,-1],[-1,1,2,-1]]
+    expected = to_fractions([[1,3,2,0],[3,9,1,1],[1,4,5,-1],[-1,1,2,-1]])
     assert expected == trasportation(square_matrix)
     
 def test_trasportation_for_non_square_matrix():
-    expected = [[2,-2,4],[-1,1,-2],[4,-7,5],[1,1,4],[-2,-1,-7]]
+    expected = to_fractions([[2,-2,4],[-1,1,-2],[4,-7,5],[1,1,4],[-2,-1,-7]])
     assert expected == trasportation(general_matrix)
 
 def test_gauss_test1():
-    expected = [[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, 1.4]]
+    expected = to_fractions([[1, 3, 1, -1], [0.0, -5.0, 3.0, 4.0], [0.0, 0.0, 1.0, 4.0], [0.0, 0.0, 0.0, Fraction(7,5)]])
     switch,new_matrix = gauss(square_matrix)
     assert pow(-1,switch) == -1 # controllo se switch è pari
     assert expected == new_matrix

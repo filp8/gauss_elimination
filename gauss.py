@@ -3,22 +3,15 @@ from copy import deepcopy
 from fractions import *
 from tui import *
 
-# for debug
-def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
-    new_matrix: list[list[Fraction]] = []
-    for line in matrix:
-        new_matrix.append([Fraction(x,1) for x in line])
-    return new_matrix
-
-def to_fractions2(matrix) -> list[list[Fraction]]:
+def to_fractions(matrix) -> list[list[Fraction]]:
     new_matrix: list[list[Fraction]] = []
     for line in matrix:
         nline = []
         for num in line:
-            if type(num)==int:
+            if (type(num)==int) | (type(num)==str):
                 nline.append(Fraction(num))
-            elif type(num)==str:
-                nline.append(Fraction(num))
+            elif type(num)== Fraction:
+                nline.append(num)
             elif type(num)==float:
                 nline.append(Fraction.from_float(num))
             else:
@@ -30,12 +23,12 @@ def to_fractions2(matrix) -> list[list[Fraction]]:
 # line1 = line1 + line2
 def sum_line(line1: list[int],line2: list[int]) -> None:
     for n,i in enumerate(line2):
-        line1[n] = round(i + line1[n],3)
+        line1[n] = i + line1[n]
 
 def dot_product(scalar: Fraction, line: list[Fraction]) -> list[Fraction]:
     result = []
     for i in range(len(line)):
-        result.append(round(line[i] * scalar,3))
+        result.append(line[i] * scalar)
     return result
 
 def is_zero(start_point,col,matrix) -> Iterable[Fraction]:
@@ -48,7 +41,10 @@ def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
     matrix[i_line1],matrix[i_line2] = matrix[i_line2],matrix[i_line1]
 
 def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
-    return (-1)*(a/pivot)
+    return (-1)*(fractional_division(a, pivot))
+
+def fractional_division(n:Fraction, d:Fraction):
+    return Fraction((n.numerator * d.denominator),(d.numerator*n.denominator))
 
 def simplify(matrix,col,index_pivot):
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
@@ -167,7 +163,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
             div = line[i]
             nline = []
             for num in line:
-                nline.append(round(num/div))
+                nline.append(num/div)
             matouttraspg[i]=nline
     finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
     return finalmat
