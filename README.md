@@ -3,8 +3,11 @@
 
 Semplice algoritmo in python per l'eliminazione di Gauss
 
-
-
+# Librterie usate
+usiamo la libreria di default Fractions che permette di usare numeri razionali evitando i float
+```
+https://docs.python.org/3/library/fractions.htmlhttps://docs.python.org/3/library/fractions.html
+```
 ## Come eseguire i test
 
 Per eseguire i test prima bisogna aver scaricato poetry, se non si è scaricato lo si può fare su MacOS con il seguente comando:
