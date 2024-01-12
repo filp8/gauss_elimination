@@ -67,6 +67,9 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
                 switch_line(matout,i,i_not_zero)
         simplify(matout,i,i)
     return switch_count,matout
+
+def fullGauss(matrix: list[list[Fraction]])->list[list[Fraction]]:
+    return antidiagonalTrasportation(gauss(antidiagonalTrasportation(gauss(matrix)[1]))[1])
         
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
@@ -183,17 +186,20 @@ def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->l
         matout.append(lout)
     return matout
 
-def vector_linearly_independent(Vettori:list[list[Fraction]])->(bool,list[list[Fraction]]):
+def Is_linearly_independent(Vettori:list[list[Fraction]])->bool:
     isIndipendent = None
-    max_rank = min(len(Vettori),len(Vettori[0]))
-
-    reducedMatrix = gauss(Vettori)
-
-
-    return (isIndipendent,reducedMatrix)
+    n_row = len(Vettori)
+    n_col = len(Vettori[0])
+    max_rank = min(n_row,n_col)
+    reducedMatrix = fullGauss(Vettori)
+    for index in range(max_rank):
+        isIndipendent = reducedMatrix[index][index]!=0
+        if isIndipendent==False:
+            return isIndipendent
+    return isIndipendent
 
 # classica matrice quadrata
-square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
@@ -204,9 +210,3 @@ invmatrix1 = [[1,2],[2,3]]
 # matrice invertibile e la sua inversa
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
-
-
-printMat(gauss(square_matrix)[1])
-
-
-printMat(gauss(square_matrix)[1])
