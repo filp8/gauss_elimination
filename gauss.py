@@ -16,12 +16,13 @@ def to_fractions(matrix: list[list[Any]]) -> list[list[Fraction]]:
     return [line_to_fractions(line) for line in matrix]
 
 # line1 = line1 + line2
-def sum_line(line1: list[int],line2: list[int]) -> None:
+def sum_line(line1: list[Fraction],line2: list[Fraction]) -> None:
     for n,i in enumerate(line2):
         line1[n] = i + line1[n]
 
 def dot_product(scalar: Fraction, line: list[Fraction]) -> list[Fraction]:
     result = []
+    scalar = Fraction(scalar)
     for i in range(len(line)):
         result.append(line[i] * scalar)
     return result
@@ -36,12 +37,9 @@ def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
     matrix[i_line1],matrix[i_line2] = matrix[i_line2],matrix[i_line1]
 
 def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
-    return (-1)*(fractional_division(a, pivot))
+    return (Fraction(-1))*(a/pivot)
 
-def fractional_division(n:Fraction, d:Fraction):
-    return Fraction((n.numerator * d.denominator),(d.numerator*n.denominator))
-
-def simplify(matrix,col,index_pivot):
+def simplify(matrix:list[list[Fraction]],col,index_pivot):
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
         if i + col > len(matrix):
             return
