@@ -39,9 +39,6 @@ def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
 def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
     return (Fraction(-1))*(a/pivot)
 
-def fractional_division(n:Fraction, d:Fraction):
-    return Fraction((n.numerator * d.denominator),(d.numerator*n.denominator))
-
 def simplify(matrix:list[list[Fraction]],col,index_pivot):
     for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
         if i + col > len(matrix):
