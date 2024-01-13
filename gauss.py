@@ -208,5 +208,3 @@ invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
 
 printMat(gauss(square_matrix)[1])
 
-
-printMat(gauss(square_matrix)[1])
