@@ -49,6 +49,8 @@ def simplify(matrix:list[list[Fraction]],col,index_pivot):
 
 
 def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
+    if not (isinstance(matrix, list) and all(isinstance(line, list) and all(isinstance(e, Fraction) for e in line) for line in matrix)):
+        matrix = to_fractions(matrix)
     switch_count = 0
     matout = deepcopy(matrix)
     for i,line in enumerate(matout):
