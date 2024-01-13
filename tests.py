@@ -1,4 +1,3 @@
-from copy import deepcopy
 from gauss import *
 
 # classica matrice quadrata

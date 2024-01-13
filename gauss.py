@@ -45,11 +45,18 @@ def simplify(matrix:list[list[Fraction]],col,index_pivot):
             return
         if matrix[index_pivot + i][col] == 0:
             continue
-        s = dot_product(calculate_scalar(matrix[index_pivot][col],matrix[index_pivot + i][col]),matrix[index_pivot])
+        s = dot_product(calculate_scalar(
+            matrix[index_pivot][col],matrix[index_pivot + i][col]
+            ),matrix[index_pivot]
+        )
         sum_line(matrix[index_pivot + i],s)
 
-
-def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
+def square_gauss(matrix: list[list[int]]) -> Tuple[int, list[list[int]]]:
+    #questa funzione è ottimizzata per le matrici quadrate
+    if len(matrix[0]) != len(matrix):
+        raise ValueError(f"""The matrix must be a square.
+            Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}"""
+        )
     switch_count = 0
     matout = deepcopy(matrix)
     for i,line in enumerate(matout):
@@ -67,10 +74,10 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
                 switch_line(matout,i,i_not_zero)
         simplify(matout,i,i)
     return switch_count,matout
-        
+
 def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
     if not direct_calculation:
-        det,matrix = gauss(matrix)
+        det,matrix = square_gauss(matrix)
     for i,line in enumerate(matrix):
         if line[i] == 0:
             return False
@@ -86,14 +93,14 @@ def trasportation(matrix: list[list[int]]) -> list[list[int]]:
 def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
     outList=[]
     for i in range(len(A)):
-      newRow=list(A[i])
-      newRow.append(b[i][0])
-      outList.append(newRow)
+        newRow=list(A[i])
+        newRow.append(b[i][0])
+        outList.append(newRow)
     return outList
 
 def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     Ab=cloneAndAppend(A, b)
-    gauss(Ab)
+    square_gauss(Ab)
     print("gauss(Ab) =", Ab)
 
     outList=[]
@@ -121,7 +128,7 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     return matRevOut
 
 def det(matrix: list[list[int]]) -> int:
-    switch_count,matrix = gauss(matrix)
+    switch_count,matrix = square_gauss(matrix)
     det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
         det *= line[i]
@@ -129,7 +136,10 @@ def det(matrix: list[list[int]]) -> int:
 
 def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     if len(matrix[0]) != len(matrix):
-        raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
+        raise IndexError(
+            f"""The matrix must be a square.
+            Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}"""
+        )
     if not(invertible(matrix)):
         raise IndexError(f"The matrix is not invertible.")
     matout = deepcopy(matrix)
@@ -139,7 +149,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
         lcan = [0]*ncol
         lcan[i] = 1
         line+=lcan
-    det,matout = gauss(matout)
+    det,matout = square_gauss(matout)
     matoutcol = matRigToCol(matout) 
     matsx = matoutcol[0:ncol]
     matdx = matoutcol[ncol:]
@@ -150,7 +160,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     matouttrasp = []
     for i,linesx in enumerate(matsx):
             matouttrasp.append(linesx+matdx[i])
-    det,matouttraspg=gauss(matouttrasp)
+    det,matouttraspg=square_gauss(matouttrasp)
     for i,line in enumerate(matouttraspg):
         if line[i]!=1 and line[i]!=0:
             div = line[i]
