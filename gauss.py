@@ -22,7 +22,6 @@ def sum_line(line1: list[Fraction],line2: list[Fraction]) -> None:
 
 def dot_product(scalar: Fraction, line: list[Fraction]) -> list[Fraction]:
     result = []
-    scalar = Fraction(scalar)
     for i in range(len(line)):
         result.append(line[i] * scalar)
     return result
