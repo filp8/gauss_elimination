@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import javax.naming.SizeLimitExceededException;
 
 public class Matrix {
     
@@ -15,10 +12,10 @@ public class Matrix {
         core.addLast(firstLine);
     }
 
-    public void addLine(ArrayList<Integer> line) throws SizeLimitExceededException {
+    public void addLine(ArrayList<Integer> line) throws IndexOutOfBoundsException {
         int len = core.get(0).get(0);
         if (line.size() != len) {
-            throw new SizeLimitExceededException("The line can be maximum long:" + len);
+            throw new IndexOutOfBoundsException("The line can be maximum long:" + len);
         }
         core.addLast(line);
     }
