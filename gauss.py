@@ -124,7 +124,7 @@ def resultColumn(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[Fracti
     outList.reverse()
     return  outList
 
-def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
+def antidiagonalTrasportation(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matRev=[]
     for line in matrix:
         li = list(reversed(line))
@@ -139,7 +139,7 @@ def det(matrix: list[list[Fraction]]) -> int:
         det *= line[i]
     return det
 
-def inversematrix(matrix: list[list[Fraction]]) -> list[list[int]]:
+def inversematrix(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     if not(invertible(matrix)):
@@ -148,8 +148,8 @@ def inversematrix(matrix: list[list[Fraction]]) -> list[list[int]]:
     nline = len(matrix)
     ncol = len(matrix[0])
     for i,line in enumerate(matout):
-        lcan = [0]*ncol
-        lcan[i] = 1
+        lcan = [Fraction(0)]*ncol
+        lcan[i] = Fraction(1)
         line+=lcan
     det,matout = gauss(matout)
     matoutcol = matRigToCol(matout) 
@@ -173,7 +173,7 @@ def inversematrix(matrix: list[list[Fraction]]) -> list[list[int]]:
     finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
     return finalmat
 
-def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
+def matRigToCol(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matout = []
     for i,col in enumerate(matrix[0]):
         colonna = []
@@ -182,7 +182,7 @@ def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
         matout.append(colonna)
     return matout
 
-def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[int]]:
+def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->list[list[int]]:
     matB = matRigToCol(matB)
     matout = []
     for line in matA:
