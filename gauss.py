@@ -71,6 +71,16 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
 
 
 def invertible(matrix: list[list[Fraction]], direct_calculation = False) -> bool:
+    """
+    Check if a matrix is invertible.
+
+    Parameters:
+    matrix (list[list[Fraction]]): The matrix to be checked.
+    direct_calculation (bool): Flag indicating whether to perform direct calculation or use Gaussian elimination first. Default is False.
+
+    Returns:
+    bool: True if the matrix is invertible, False otherwise.
+    """
     if not direct_calculation:
         det,matrix = gauss(matrix)
     for i,line in enumerate(matrix):
