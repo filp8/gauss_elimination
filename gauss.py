@@ -116,7 +116,7 @@ def resultColumn(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[Fracti
         a_ij=Ab[i][j]
         b_i=Ab[i][-1]
         updKnown=b_i/a_ij
-        outList.append([updKnown])
+        outList.append(updKnown)
         for k in range(j):
             coefToNull=A[k][j]
             Ab[k][-1]-=updKnown*coefToNull
