@@ -132,14 +132,14 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
-def det(matrix: list[list[int]]) -> int:
+def det(matrix: list[list[Fraction]]) -> int:
     switch_count,matrix = gauss(matrix)
     det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
         det *= line[i]
     return det
 
-def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
+def inversematrix(matrix: list[list[Fraction]]) -> list[list[int]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     if not(invertible(matrix)):
