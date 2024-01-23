@@ -2,7 +2,7 @@ from fractions import Fraction
 import os
 import sys
 
-def printMat(mat:list[list[int]]):
+def printMat(mat:list[list[Fraction]]):
     s = str()
     le = 0
     for line in mat:
