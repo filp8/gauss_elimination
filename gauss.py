@@ -77,8 +77,8 @@ def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
             return False
     return True
 
-def trasportation(matrix: list[list[int]]) -> list[list[int]]:
-    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
+def trasportation(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
+    new_matrix: list[list[Fraction]] = [[] for _ in range(len(matrix[0]))]
     for line in matrix:
         for i,new_line in zip(line,new_matrix):
             new_line.append(i)
