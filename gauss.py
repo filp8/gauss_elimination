@@ -128,7 +128,7 @@ def det(matrix: list[list[int]]) -> int:
         det *= line[i]
     return det
 
-def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
+def inversematrix(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     if not(invertible(matrix)):
