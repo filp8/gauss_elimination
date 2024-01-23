@@ -69,7 +69,7 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
         simplify(matout,i,i)
     return switch_count,matout
         
-def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
+def invertible(matrix: list[list[Fraction]], direct_calculation = False) -> bool:
     if not direct_calculation:
         det,matrix = gauss(matrix)
     for i,line in enumerate(matrix):
