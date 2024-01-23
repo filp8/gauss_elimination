@@ -84,7 +84,7 @@ def trasportation(matrix: list[list[int]]) -> list[list[int]]:
             new_line.append(i)
     return new_matrix
 
-def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
+def cloneAndAppend(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[list[Fraction]]:
     outList=[]
     for i in range(len(A)):
       newRow=list(A[i])
