@@ -162,7 +162,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
     return finalmat
 
-def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
+def matRigToCol(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matout = []
     for i,col in enumerate(matrix[0]):
         colonna = []
