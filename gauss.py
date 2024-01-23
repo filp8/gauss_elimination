@@ -113,7 +113,7 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     outList.reverse()
     return  outList
 
-def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
+def antidiagonalTrasportation(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matRev=[]
     for line in matrix:
         li = list(reversed(line))
