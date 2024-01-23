@@ -171,7 +171,7 @@ def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
         matout.append(colonna)
     return matout
 
-def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[int]]:
+def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->list[list[Fraction]]:
     matB = matRigToCol(matB)
     matout = []
     for line in matA:
