@@ -92,7 +92,7 @@ def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float
       outList.append(newRow)
     return outList
 
-def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
+def resultColumn(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[Fraction]:
     Ab=cloneAndAppend(A, b)
     gauss(Ab)
     print("gauss(Ab) =", Ab)
