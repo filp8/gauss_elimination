@@ -121,7 +121,7 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
-def det(matrix: list[list[int]]) -> int:
+def det(matrix: list[list[Fraction]]) -> Fraction:
     switch_count,matrix = gauss(matrix)
     det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
