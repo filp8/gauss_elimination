@@ -184,6 +184,12 @@ def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[i
         matout.append(lout)
     return matout
 
+def markov(vet:list[Fraction],mat:list[list[Fraction]], n:int) -> list[Fraction]:
+    v = list(vet)
+    for i in range(n):
+        v = matrixmoltiplication(v,mat)
+    return v
+
 # classica matrice quadrata
 square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
