@@ -42,6 +42,3 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=
         insPartenza.append(last)
         generatoreR(unita,limit-1,insPartenza,last,operazione)
     return insPartenza
-
-printMat(multiplyTableCongruence(generatore(1,9),9,moltiplicazione))
-printMat(multiplyTableCongruence(generatore(1,9),9,moltiplicazione))
