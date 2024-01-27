@@ -69,7 +69,7 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
         simplify(matout,i,i)
     return switch_count,matout
         
-def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
+def invertible(matrix: list[list[Fraction]], direct_calculation = False) -> bool:
     if not direct_calculation:
         det,matrix = gauss(matrix)
     for i,line in enumerate(matrix):
@@ -77,14 +77,14 @@ def invertible(matrix: list[list[int]], direct_calculation = False) -> bool:
             return False
     return True
 
-def trasportation(matrix: list[list[int]]) -> list[list[int]]:
-    new_matrix: list[list[int]] = [[] for _ in range(len(matrix[0]))]
+def trasportation(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
+    new_matrix: list[list[Fraction]] = [[] for _ in range(len(matrix[0]))]
     for line in matrix:
         for i,new_line in zip(line,new_matrix):
             new_line.append(i)
     return new_matrix
 
-def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float]]:
+def cloneAndAppend(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[list[Fraction]]:
     outList=[]
     for i in range(len(A)):
       newRow=list(A[i])
@@ -92,7 +92,7 @@ def cloneAndAppend(A: list[list[float]], b: list[list[float]]) ->list[list[float
       outList.append(newRow)
     return outList
 
-def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
+def resultColumn(A: list[list[Fraction]], b: list[list[Fraction]]) ->list[Fraction]:
     Ab=cloneAndAppend(A, b)
     gauss(Ab)
     print("gauss(Ab) =", Ab)
@@ -113,7 +113,7 @@ def resultColumn(A: list[list[float]], b: list[list[float]]) ->list[float]:
     outList.reverse()
     return  outList
 
-def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
+def antidiagonalTrasportation(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matRev=[]
     for line in matrix:
         li = list(reversed(line))
@@ -121,14 +121,14 @@ def antidiagonalTrasportation(matrix: list[list[int]]) -> list[list[int]]:
     matRevOut = list(reversed(matRev))
     return matRevOut
 
-def det(matrix: list[list[int]]) -> int:
+def det(matrix: list[list[Fraction]]) -> Fraction:
     switch_count,matrix = gauss(matrix)
     det = pow(-1,switch_count)
     for i,line in enumerate(matrix):
         det *= line[i]
     return det
 
-def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
+def inversematrix(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     if len(matrix[0]) != len(matrix):
         raise IndexError(f"The matrix must be a square. Lines = {len(matrix)} Collums = {len(matrix[0])}; {len(matrix)} != {len(matrix[0])}")
     if not(invertible(matrix)):
@@ -162,7 +162,7 @@ def inversematrix(matrix: list[list[int]]) -> list[list[int]]:
     finalmat = antidiagonalTrasportation(matRigToCol(matRigToCol(matouttraspg)[ncol:]))
     return finalmat
 
-def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
+def matRigToCol(matrix: list[list[Fraction]]) -> list[list[Fraction]]:
     matout = []
     for i,col in enumerate(matrix[0]):
         colonna = []
@@ -171,7 +171,7 @@ def matRigToCol(matrix: list[list[int]]) -> list[list[int]]:
         matout.append(colonna)
     return matout
 
-def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[int]]:
+def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->list[list[Fraction]]:
     matB = matRigToCol(matB)
     matout = []
     for line in matA:
