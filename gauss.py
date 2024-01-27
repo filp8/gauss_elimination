@@ -185,7 +185,8 @@ def matrixmoltiplication(matA:list[list[int]],matB:list[list[int]])->list[list[i
     return matout
 
 def markov(vet:list[Fraction],mat:list[list[Fraction]], n:int) -> list[Fraction]:
-    v = list(vet)
+    v = [vet]
+    print(v)
     for i in range(n):
         v = matrixmoltiplication(v,mat)
     return v
@@ -202,3 +203,10 @@ invmatrix1 = [[1,2],[2,3]]
 # matrice invertibile e la sua inversa
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
+
+# matrici per markov
+
+markovmat =to_fractions([['1/2','1/4','1/4'],['1/4','1/2','1/4'],['1/4','1/4','1/2']])
+markovvet = [1,0,0]
+
+printMat(markov(markovvet,markovmat,3))
