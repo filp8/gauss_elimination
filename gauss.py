@@ -15,7 +15,7 @@ def to_fractions2(matrix) -> list[list[Fraction]]:
     for line in matrix:
         nline = []
         for num in line:
-            if type(num)==int | type(num)==str:
+            if type(num)==int or type(num)==str:
                 nline.append(Fraction(num))
             elif type(num)==float:
                 nline.append(Fraction.from_float(num))
