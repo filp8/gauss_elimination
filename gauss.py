@@ -184,6 +184,7 @@ def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->l
         matout.append(lout)
     return matout
 
+
 # classica matrice quadrata
 square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
@@ -196,3 +197,4 @@ invmatrix1 = [[1,2],[2,3]]
 # matrice invertibile e la sua inversa
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
+
