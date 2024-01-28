@@ -22,8 +22,7 @@ poetry install
 E come ultima cosa fare il comando nella directory del progetto
 
 ```bash
-poetry run pytest testCongruence.py
-poetry run pytest testGauss.py
+poetry run pytest testCongruence.py testGauss.py
 ```
 
 per eseguire i test
