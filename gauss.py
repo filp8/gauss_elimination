@@ -32,8 +32,10 @@ def is_zero(start_point,col,matrix) -> Iterable[Fraction]:
         yield matrix[start_point + i][col] == 0
 
 # line1,line2 = line2,line1
-def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
-    matrix[i_line1],matrix[i_line2] = matrix[i_line2],matrix[i_line1]
+def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int)->list[list[Fraction]]:
+    mout = deepcopy(matrix)
+    mout[i_line1],mout[i_line2] = matrix[i_line2],matrix[i_line1]
+    return mout
 
 def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
     return (Fraction(-1))*(a/pivot)
@@ -65,7 +67,7 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
                     if line1[i] != 0:
                         i_not_zero = n
                         break
-                switch_line(matout,i,i_not_zero)
+                mout = switch_line(matout,i,i_not_zero)
         simplify(matout,i,i)
     return switch_count,matout
         
