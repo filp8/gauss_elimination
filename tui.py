@@ -1,7 +1,8 @@
+from fractions import Fraction
 import os
 import sys
 
-def printMat(mat:list[list[int]]):
+def printMat(mat:list[list[Fraction]]):
     s = str()
     le = 0
     for line in mat:
@@ -22,8 +23,8 @@ def printMat(mat:list[list[int]]):
             s+=toadd
     print(s)
 
-def input_matrix() -> list[list[int]]:
-    matrix: list[list[int]] = []
+def input_matrix() -> list[list[Fraction]]:
+    matrix: list[list[Fraction]] = []
     i = 0
     while True:
         matrix.append([])
@@ -32,7 +33,7 @@ def input_matrix() -> list[list[int]]:
             break
         for literal in line.split():
             try:
-                matrix[i].append(int(literal))
+                matrix[i].append(Fraction(literal))
             except ValueError:
                 print(f"[INPUT ERROR] '{literal}' is not a base 10 number",file=sys.stderr)
                 os._exit(1)
