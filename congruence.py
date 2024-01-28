@@ -51,4 +51,4 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=
     return insPartenza
 
 
-printMat(multiplyTable(['a','b','c','d']))
+printMat(sumTable(['a','b','c','d']))
