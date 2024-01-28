@@ -11,25 +11,6 @@ def line_to_fractions(line: list[Any]) -> list[Fraction]:
         else:
             raise ValueError(f"Float type can create problems")
     return nline
-# for debug
-def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
-    new_matrix: list[list[Fraction]] = []
-    for line in matrix:
-        new_matrix.append([Fraction(x,1) for x in line])
-    return new_matrix
-
-def to_fractions2(matrix) -> list[list[Fraction]]:
-    new_matrix: list[list[Fraction]] = []
-    for line in matrix:
-        nline = []
-        for num in line:
-            if type(num)==int or type(num)==str:
-                nline.append(Fraction(num))
-            elif type(num)==float:
-                nline.append(Fraction.from_float(num))
-            else:
-                raise  ValueError(f"input type not implemented.")
-        new_matrix.append(nline)
 
 def to_fractions(matrix: list[list[Any]]) -> list[list[Fraction]]:
     return [line_to_fractions(line) for line in matrix]
