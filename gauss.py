@@ -3,6 +3,14 @@ from copy import deepcopy
 from fractions import *
 from tui import *
 
+def line_to_fractions(line: list[Any]) -> list[Fraction]:
+    nline = []
+    for num in line:
+        if type(num) != float:
+            nline.append(Fraction(num))
+        else:
+            raise ValueError(f"Float type can create problems")
+    return nline
 # for debug
 def to_fractions(matrix: list[list[int]]) -> list[list[Fraction]]:
     new_matrix: list[list[Fraction]] = []
