@@ -67,7 +67,7 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
                     if line1[i] != 0:
                         i_not_zero = n
                         break
-                mout = switch_line(matout,i,i_not_zero)
+                matout = switch_line(matout,i,i_not_zero)
         simplify(matout,i,i)
     return switch_count,matout
         
@@ -188,7 +188,7 @@ def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->l
 
 
 # classica matrice quadrata
-square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
 general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
@@ -200,4 +200,4 @@ invmatrix1 = [[1,2],[2,3]]
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
 
-print(switch_line([[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]],1,2))
+print(gauss(square_matrix))
