@@ -30,7 +30,7 @@ def generatore(unita:int,limit:int,insPartenza:list[int]=None,partenza=0,operazi
         insPartenza.append(unita*i)
     return insPartenza
 
-def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=somma)->list[list[int]]:
+def generatoreR(unita:int,limit:int,insPartenza:list[int]=None,partenza=0,operazione=somma)->list[list[int]]:
     if insPartenza == None: insPartenza = []
     if partenza == 0 and limit>0:
         insPartenza.append(0)
@@ -42,3 +42,5 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=
         insPartenza.append(last)
         generatoreR(unita,limit-1,insPartenza,last,operazione)
     return insPartenza
+
+
