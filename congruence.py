@@ -50,5 +50,3 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=
         generatoreR(unita,limit-1,insPartenza,last,operazione)
     return insPartenza
 
-
-printMat(sumTable(['a','b','c','d']))
