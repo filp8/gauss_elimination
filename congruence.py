@@ -10,6 +10,13 @@ def multiplyTable(insieme:list[int])->list[int]:
             table[x].append(insieme[x]*insieme[y])
     return table
 
+def sumTable(insieme:list[any])->list[any]:
+    table: list[list[int]] = [[] for _ in range(len(insieme))]
+    for x in range(len(insieme)):
+        for y in range(len(insieme)):
+            table[x].append(insieme[x]+insieme[y])
+    return table
+
 somma = lambda x,y:(x+y,'+')
 moltiplicazione = lambda x,y:(x*y,'*')
 
@@ -42,3 +49,4 @@ def generatoreR(unita:int,limit:int,insPartenza:list[int],partenza=0,operazione=
         insPartenza.append(last)
         generatoreR(unita,limit-1,insPartenza,last,operazione)
     return insPartenza
+
