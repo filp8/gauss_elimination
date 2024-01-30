@@ -208,7 +208,6 @@ def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
                         break
                 switch_line(matout,i,i_not_zero)
         simplify(matout,i+gradinirig,i+gradinicol)
-        printMat(matout)
     return switch_count,matout
 
 
@@ -225,4 +224,4 @@ invmatrix1 = [[1,2],[2,3]]
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
 
-gauss(square_matrix)[1]
+printMat(gauss(general_matrix1)[1])
