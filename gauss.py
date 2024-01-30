@@ -25,7 +25,17 @@ def dot_product(scalar: Fraction, line: list[Fraction]) -> list[Fraction]:
     for i in range(len(line)):
         result.append(line[i] * scalar)
     return result
+"""
+    Questa funzione controlla se gli elementi di una colonna specifica in una matrice, a partire da un punto di inizio specifico, sono zero.
 
+    Parametri:
+    start_point (int): Il punto di inizio per il controllo nella matrice.
+    col (int): L'indice della colonna da controllare.
+    matrix (list[list[Fraction]]): La matrice da controllare.
+
+    Ritorna:
+    Iterable[bool]: Un generatore che produce valori booleani. Ogni valore indica se l'elemento corrispondente nella colonna è zero.
+    """
 def is_zero(start_point,col,matrix) -> Iterable[Fraction]:
     numline = len(matrix)
     for i in range(numline - start_point):
@@ -38,36 +48,27 @@ def switch_line(matrix: list[list[Fraction]], i_line1: int, i_line2: int):
 def calculate_scalar(pivot:Fraction,a:Fraction) -> Fraction:
     return (Fraction(-1))*(a/pivot)
 
-def simplify(matrix:list[list[Fraction]],col,index_pivot):
-    for i in range(1,(len(matrix) - col)): # i posizione relativo rispetto a list1
-        if i + col > len(matrix):
+"""
+    Questa funzione semplifica una matrice utilizzando l'eliminazione di Gauss. 
+
+    Parametri:
+    matrix (list[list[Fraction]]): La matrice da semplificare.
+    col (int): L'indice della colonna corrente.
+    index_pivot (int): L'indice della riga del pivot.
+
+    La funzione modifica la matrice in-place, quindi non ritorna nulla.
+    """
+def simplify(matrix:list[list[Fraction]],rig_pivot,col_pivot):
+    for i in range(1,(len(matrix) - rig_pivot)): # i posizione relativo rispetto a list1
+        if i + rig_pivot > len(matrix):
             return
-        if matrix[index_pivot + i][col] == 0:
+        if matrix[rig_pivot + i][col_pivot] == 0:
             continue
-        s = dot_product(calculate_scalar(matrix[index_pivot][col],matrix[index_pivot + i][col]),matrix[index_pivot])
-        sum_line(matrix[index_pivot + i],s)
+        s = dot_product(calculate_scalar(matrix[rig_pivot][col_pivot],matrix[rig_pivot + i][col_pivot]),matrix[rig_pivot])
+        sum_line(matrix[rig_pivot + i],s)
 
 
-def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
-    if not (isinstance(matrix, list) and all(isinstance(line, list) and all(isinstance(e, Fraction) for e in line) for line in matrix)):
-        matrix = to_fractions(matrix)
-    switch_count = 0
-    matout = deepcopy(matrix)
-    for i,line in enumerate(matout):
-        pivot = line[i]
-        if pivot == 0:
-            if all(is_zero(i + 1,i,matout)):
-                continue
-            else:
-                switch_count += 1
-                i_not_zero = 0
-                for n,line1 in enumerate(matout[i:], start=i):
-                    if line1[i] != 0:
-                        i_not_zero = n
-                        break
-                switch_line(matout,i,i_not_zero)
-        simplify(matout,i,i)
-    return switch_count,matout
+
         
 def invertible(matrix: list[list[Fraction]], direct_calculation = False) -> bool:
     if not direct_calculation:
@@ -184,13 +185,38 @@ def matrixmoltiplication(matA:list[list[Fraction]],matB:list[list[Fraction]])->l
         matout.append(lout)
     return matout
 
+def gauss(matrix: list[list[Fraction]]) -> Tuple[int, list[list[Fraction]]]:
+    if not (isinstance(matrix, list) and all(isinstance(line, list) and all(isinstance(e, Fraction) for e in line) for line in matrix)):
+        matrix = to_fractions(matrix)
+    switch_count = 0
+    gradinirig = 0
+    gradinicol = 0
+    matout = deepcopy(matrix)
+    for i in range(min(len(matout),len(matout[0]))):
+        pivot = matout[i+gradinirig][i]
+        if pivot == 0:
+            if all(is_zero(i + 1,i,matout)):
+                gradinirig -= 1
+                gradinicol += 1
+                continue
+            else:
+                switch_count += 1
+                i_not_zero = 0
+                for n,line1 in enumerate(matout[i:], start=i):
+                    if line1[i] != 0:
+                        i_not_zero = n
+                        break
+                switch_line(matout,i,i_not_zero)
+        simplify(matout,i+gradinirig,i+gradinicol)
+    return switch_count,matout
+
 
 # classica matrice quadrata
-square_matrix = [[1.5,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
+square_matrix = [[1,3,1,-1],[3,9,4,1],[2,1,5,2],[0,1,-1,-1]]
 
 # matrice non quadrata
-general_matrix = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
-
+general_matrix1 = [[2,-1,4,1,-2],[-2,1,-7,1,-1],[4,-2,5,4,-7]]
+general_matrix2 = [[1,2,3,4],[5,6,7,8],[9,10,11,12],[13,14,15,16],[17,18,19,20]]
 # matrice invertibile 2x2
 invmatrix1 = [[1,2],[2,3]]
 
@@ -198,3 +224,4 @@ invmatrix1 = [[1,2],[2,3]]
 matrix2 = [[1,2,-1],[-2,0,1],[1,-1,0]]
 invmatrix2 = [[1,1,2],[1,1,1],[2,3,4]]
 
+printMat(gauss(general_matrix1)[1])
